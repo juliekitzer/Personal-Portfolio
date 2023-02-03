@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>listing directory /Assets/</title>
+    <style>* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+body {
+  padding: 80px 100px;
+  font: 13px "Helvetica Neue", "Lucida Grande", "Arial";
+  background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));
+  background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);
+  background-repeat: no-repeat;
+  color: #555;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-size: 22px;
+  color: #343434;
+}
+h1 em, h2 em {
+  padding: 0 5px;
+  font-weight: normal;
+}
+h1 {
+  font-size: 60px;
+}
+h2 {
+  margin-top: 10px;
+}
+h3 {
+  margin: 5px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+ul li {
+  list-style: none;
+}
+ul li:hover {
+  cursor: pointer;
+  color: #2e2e2e;
+}
+ul li .path {
+  padding-left: 5px;
+  font-weight: bold;
+}
+ul li .line {
+  padding-right: 5px;
+  font-style: italic;
+}
+ul li:first-child .path {
+  padding-left: 0;
+}
+p {
+  line-height: 1.5;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  color: #303030;
+}
+#stacktrace {
+  margin-top: 15px;
+}
+.directory h1 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+ul#files {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+ul#files li {
+  float: left;
+  width: 30%;
+  line-height: 25px;
+  margin: 1px;
+}
+ul#files li a {
+  display: block;
+  height: 25px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+ul#files li a:focus,
+ul#files li a:hover {
+  background: rgba(255,255,255,0.65);
+  border: 1px solid #ececec;
+}
+ul#files li a.highlight {
+  -webkit-transition: background .4s ease-in-out;
+  background: #ffff4f;
+  border-color: #E9DC51;
+}
+#search {
+  display: block;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 90px;
+  -webkit-transition: width ease 0.2s, opacity ease 0.4s;
+  -moz-transition: width ease 0.2s, opacity ease 0.4s;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -moz-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  font: 13px "Helvetica Neue", Arial, sans-serif;
+  padding: 4px 10px;
+  border: none;
+  background: transparent;
+  margin-bottom: 0;
+  outline: none;
+  opacity: 0.7;
+  color: #888;
+}
+#search:focus {
+  width: 120px;
+  opacity: 1.0; 
+}
+
+/*views*/
+#files span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-indent: 10px;
+}
+#files .name {
+  background-repeat: no-repeat;
+}
+#files .icon .name {
+  text-indent: 28px;
+}
+
+/*tiles*/
+.view-tiles .name {
+  width: 100%;
+  background-position: 8px 5px;
+}
+.view-tiles .size,
+.view-tiles .date {
+  display: none;
+}
+
+/*details*/
+ul#files.view-details li {
+  float: none;
+  display: block;
+  width: 90%;
+}
+ul#files.view-details li.header {
+  height: 25px;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+}
+.view-details .header {
+  border-radius: 5px;
+}
+.view-details .name {
+  width: 60%;
+  background-position: 8px 5px;
+}
+.view-details .size {
+  width: 10%;
+}
+.view-details .date {
+  width: 30%;
+}
+.view-details .size,
+.view-details .date {
+  text-align: right;
+  direction: rtl;
+}
+
+/*mobile*/
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+  }
+  #search {
+    position: static;
+    width: 100%;
+    font-size: 2em;
+    line-height: 1.8em;
+    text-indent: 10px;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 0;
+    margin: 0;
+  }
+  #search:focus {
+    width: 100%;
+    border: 0;
+    opacity: 1;
+  }
+  .directory h1 {
+    font-size: 2em;
+    line-height: 1.5em;
+    color: #fff;
+    background: #000;
+    padding: 15px 10px;
+    margin: 0;
+  }
+  ul#files {
+    border-top: 1px solid #cacaca;
+  }
+  ul#files li {
+    float: none;
+    width: auto !important;
+    display: block;
+    border-bottom: 1px solid #cacaca;
+    font-size: 2em;
+    line-height: 1.2em;
+    text-indent: 0;
+    margin: 0;
+  }
+  ul#files li:nth-child(odd) {
+    background: #e0e0e0;
+  }
+  ul#files li a {
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 15px 10px;
+  }
+  ul#files li a:focus,
+  ul#files li a:hover {
+    border: 0;
+  }
+  #files .header,
+  #files .size,
+  #files .date {
+    display: none !important;
+  }
+  #files .name {
+    float: none;
+    display: inline-block;
+    width: 100%;
+    text-indent: 0;
+    background-position: 0 50%;
+  }
+  #files .icon .name {
+    text-indent: 41px;
+  }
+}
+#files .icon-directory .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAWtQTFRFAAAA/PPQ9Nhc2q402qQ12qs2/PTX2pg12p81+/LM89NE9dto2q82+/fp2rM22qY39d6U+/bo2qo2/frx/vz32q812qs12qE279SU8c4w9NZP+/LK//367s9y7s925cp0/vzw9t92//342po2/vz25s1579B6+OSO2bQ0/v799NyT8tE79dld8Msm+OrC/vzx79KA2IYs7s6I9d6R4cJe9+OF/PLI/fry79OF/v30//328tWB89RJ8c9p8c0u9eCf//7+9txs6sts5Mdr+++5+u2z/vrv+/fq6cFz8dBs8tA57cpq+OaU9uGs27Y8//799NdX/PbY9uB89unJ//z14sNf+emh+emk+vDc+uys9+OL8dJy89NH+eic8tN5+OaV+OWR9N2n9dtl9t529+KF9+GB9Nue9NdU8tR/9t5y89qW9dpj89iO89eG/vvu2pQ12Y4z/vzy2Ict/vvv48dr/vzz4sNg///+2Igty3PqwQAAAAF0Uk5TAEDm2GYAAACtSURBVBjTY2AgA2iYlJWVhfohBPg0yx38y92dS0pKVOVBAqIi6sb2vsWWpfrFeTI8QAEhYQEta28nCwM1OVleZqCAmKCEkUdwYWmhQnFeOStQgL9cySqkNNDHVJGbiY0FKCCuYuYSGRsV5KgjxcXIARRQNncNj09JTgqw0ZbkZAcK5LuFJaRmZqfHeNnpSucDBQoiEtOycnIz4qI9bfUKQA6pKKqAgqIKQyK8BgAZ5yfODmnHrQAAAABJRU5ErkJggg==);
+}
+#files .icon-image .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGWSURBVBgZpcE/a1NhGMbh3/OeN56cKq2Dp6AoCOKmk4uCn8DNycEOIojilr2TaBfRzVnESQR3Bz+FFDoWA2IjtkRqmpyc97k9qYl/IQV7XSaJw4g0VlZfP0m13dwepPbuiH85fyhyWCx4/ubxjU6kkdxWHt69VC6XpZlFBAhwJgwJJHAmRKorbj94ewvoRBrbuykvT5R2/+lLTp05Tp45STmEJYJBMAjByILxYeM9jzr3GCczGpHGYAQhRM6fO8uFy1fJQoaUwCKYEcwwC4QQaGUBd36KTDmQ523axTGQmEcIEBORKQfG1ZDxcA/MkBxXwj1ggCQyS9TVAMmZiUxJ8Ln/kS+9PmOvcSW+jrao0mmMH5bzHfa+9UGBmciUBJ+2Fmh1h+yTQCXSkJkdCrpd8btIwwEJQnaEkOXMk7XaiF8CUxL/JdKQOwb0Ntc5SG9zHXQNd/ZFGsaEeLa2ChjzXQcqZiKNxSL0vR4unVwwMENMCATib0ZdV+QtE41I42geXt1Ze3dlMNZFdw6Ut6CIvKBhkjiM79Pyq1YUmtkKAAAAAElFTkSuQmCC);
+}
+#files .icon-application-postscript .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIWSURBVDjLhZNPbxJRFMWhRrYu3NrExIUbdzWte6M7d34Eo2Hjxm8gwZUxIYEARUKAWgwbV0BpxAW11bpQFrCoCVEMDplhQMow782/enx3WsiU0jrJ2bz7zu+9e95cHwAfSXzXhFaEVv+j60JLM58HsGIYxsi27SPHcbBIoo5oNBrxQryAVTJPJhPouu6q0+mgVquh0WhAlmUX0uv1EIvFZpCp2U8A2sA5h2maYIyhUChA0zTU63UoiuICaJ0OSSaTx5B5AJnpqqVSCbmNTWxVt9FsNtHv98+05GYyD7AsC5VKBZvFd/j2k6Etc6gjHfLgELKiujeRJGkxQGSAYDCIx8+eI/ORIb3Lkf0sWvmio9aaoC2NoQ7+QFUHCwFr5XIZ8bfvhZFhq2XgU9tEb2Tj99DCgcTx9YeOg64GZTCGPQdYEnpaLBbxZl9HfIejo1rg5nGvti3CMyxouonhIYM8ZG7NBWSz2YepVKobiUR+UXjrwry+wzBm9qnAqD03YHohbsASUP+ly2u+XC7XzmQyt9LpdJc2xuscr0ULU9NUFC6JDiFRCy4gn88/EWqFw+EEmfL7HK8+8FOAqdmrWYjC7E8kElcCgcAdWmx2LbzY5mCmc+YWXp33H/w1LQehKhPPZuK8mTjR0QxwArktQtKpsLHHEarwC81ir+ZOrwewTBCiXr157/7d0PfqjQcvH10w1jT6y/8A/nHJHcAgm2AAAAAASUVORK5CYII=);
+}
+#files .icon-video .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIfSURBVDjLpZNPaBNBGMXfbrubzBqbg4kL0lJLgiVKE/AP6Kl6UUFQNAeDIAjVS08aELx59GQPAREV/4BeiqcqROpRD4pUNCJSS21OgloISWMEZ/aPb6ARdNeTCz92mO+9N9/w7RphGOJ/nsH+olqtvg+CYJR8q9VquThxuVz+oJTKeZ63Uq/XC38E0Jj3ff8+OVupVGLbolkzQw5HOqAxQU4wXWWnZrykmYD0QsgAOJe9hpEUcPr8i0GaJ8n2vs/sL2h8R66TpVfWTdETHWE6GRGKjGiiKNLii5BSLpN7pBHpgMYhMkm8tPUWz3sL2D1wFaY/jvnWcTTaE5DyjMfTT5J0XIAiTRYn3ASwZ1MKbTmN7z+KaHUOYqmb1fcPiNa4kQBuyvWAHYfcHGzDgYcx9NKrwJYHCAyF21JiPWBnXMAQOea6bmn+4ueYGZi8gtymNVobF7BG5prNpjd+eW6X4BSUD0gOdCpzA8MpA/v2v15kl4+pK0emwHSbjJGBlz+vYM1fQeDrYOBTdzOGvDf6EFNr+LYjHbBgsaCLxr+moNQjU2vYhRXpgIUOmSWWnsJRfjlOZhrexgtYDZ/gWbetNRbNs6QT10GJglNk64HMaGgbAkoMo5fiFNy7CKDQUGqE5r38YktxAfSqW7Zt33l66WtkAkACjuNsaLVaDxlw5HdJ/86aYrG4WCgUZD6fX+jv/U0ymfxoWVZomuZyf+8XqfGP49CCrBUAAAAASUVORK5CYII=);
+}
+#files .icon-application-pdf .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHhSURBVDjLjZPLSxtRFIfVZRdWi0oFBf+BrhRx5dKVYKG4tLhRqlgXPmIVJQiC60JCCZYqFHQh7rrQlUK7aVUUfCBRG5RkJpNkkswrM5NEf73n6gxpHujAB/fOvefjnHM5VQCqCPa1MNoZnU/Qxqhx4woE7ZZlpXO53F0+n0c52Dl8Pt/nQkmhoJOCdUWBsvQJ2u4ODMOAwvapVAqSJHGJKIrw+/2uxAmuJgFdMDUVincSxvEBTNOEpmlIp9OIxWJckMlkoOs6AoHAg6RYYNs2kp4RqOvfuIACVFVFPB4vKYn3pFjAykDSOwVta52vqW6nlEQiwTMRBKGygIh9GEDCMwZH6EgoE+qHLMuVBdbfKwjv3yE6Ogjz/PQ/CZVDPSFRRYE4/RHy1y8wry8RGWGSqyC/nM1meX9IQpQV2JKIUH8vrEgYmeAFwuPDCHa9QehtD26HBhCZnYC8ucGzKSsIL8wgsjiH1PYPxL+vQvm5B/3sBMLyIm7GhhCe90BaWykV/Gp+VR9oqPVe9vfBTsruM1HtBKVPmFIUNusBrV3B4ev6bsbyXlPdkbr/u+StHUkxruBPY+0KY8f38oWX/byvNAdluHNLeOxDB+uyQQfPCWZ3NT69BYJWkjxjnB1o9Fv/ASQ5s+ABz8i2AAAAAElFTkSuQmCC);
+}
+#files .icon-psd .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIcSURBVDjLjZO/T1NhFIafc+/trdRaYk1KUEEWjXHRaCSik+E/cDHGzYXB2YHRhMRFY1SYmRgYHZ3VxIRFDYMraMC2hrbQXm7v9+M4UGobiOEk7/adN+9zvnNEVQEQkYvAGBDy/6oBm6rqAVBVeia30jRtGmOctVaPU5qmuri4+AaYAgJVHTKYNsa4drutnU6nr1arpY1GQ6vVqlprdXt7W5eWlvomMv/uw6tSofB4p+NOF0biYtc48tEAhXiuTZzh/s1xyuUyWZbhvWdlZeXt3Nzca14sf6zW6nXf7uzrcfq9s6sLy5+1Xq8fQQKmo1ZCvlAoyo+tXT5tPGO09IckM2zWznH3/AJ3rl5ACInjmGazifceay2VSgWASISSBaz3FIs1RnJlPF18vEG1keDVk1lLFEWICM45wvAfYqTKriqje0lGI01x2qFtuuwkKQ26oEKcCwnDEBFBRA6HfmBw8JWwl3o2ti7j8+u0TUKzcYkrY/n+wyAIEJEjSxEglLyH5r7j+tg8T1oVZr8GzE69JIoiFMiM7zeHYUgQBAMJVBGU77+eYoxhLcvIxnNk6w8xxvDo3hqH+yIieO+HEkQB/qe6bPL5g/cckCkDiBhjOJULhlCGDJIkXX2z+m3GeW4UCnExyxxxHIIOLNLk2WP5AaQXTYDb1tovgHCy8lEUzQS9g1LAO+f2AX+SZudcAjgZOOeJ3jkHJ0zggNpfYEZnU63wHeoAAAAASUVORK5CYII=);
+}
+</style>
+    <script>
+      function $(id){
+        var el = 'string' == typeof id
+          ? document.getElementById(id)
+          : id;
+
+        el.on = function(event, fn){
+          if ('content loaded' == event) {
+            event = window.attachEvent ? "load" : "DOMContentLoaded";
+          }
+          el.addEventListener
+            ? el.addEventListener(event, fn, false)
+            : el.attachEvent("on" + event, fn);
+        };
+
+        el.all = function(selector){
+          return $(el.querySelectorAll(selector));
+        };
+
+        el.each = function(fn){
+          for (var i = 0, len = el.length; i < len; ++i) {
+            fn($(el[i]), i);
+          }
+        };
+
+        el.getClasses = function(){
+          return this.getAttribute('class').split(/\s+/);
+        };
+
+        el.addClass = function(name){
+          var classes = this.getAttribute('class');
+          el.setAttribute('class', classes
+            ? classes + ' ' + name
+            : name);
+        };
+
+        el.removeClass = function(name){
+          var classes = this.getClasses().filter(function(curr){
+            return curr != name;
+          });
+          this.setAttribute('class', classes.join(' '));
+        };
+
+        return el;
+      }
+
+      function search() {
+        var str = $('search').value.toLowerCase();
+        var links = $('files').all('a');
+
+        links.each(function(link){
+          var text = link.textContent.toLowerCase();
+
+          if ('..' == text) return;
+          if (str.length && ~text.indexOf(str)) {
+            link.addClass('highlight');
+          } else {
+            link.removeClass('highlight');
+          }
+        });
+      }
+
+      $(window).on('content loaded', function(){
+        $('search').on('keyup', search);
+      });
+    </script>
+  </head>
+  <body class="directory">
+    <input id="search" type="text" placeholder="Search" autocomplete="off" />
+    <div id="wrapper">
+      <h1><a href="/">~</a> / <a href="/Assets">Assets</a> / </h1>
+      <ul id="files" class="view-tiles"><li><a href="/" class="icon icon-directory" title=".."><span class="name">..</span><span class="size"></span><span class="date"></span></a></li>
+<li><a href="/Assets/AccentImage.jpg" class="icon icon icon-jpg icon-image" title="AccentImage.jpg"><span class="name">AccentImage.jpg</span><span class="size">359390</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/Adobe-Experience-Cloud.png" class="icon icon icon-png icon-image" title="Adobe-Experience-Cloud.png"><span class="name">Adobe-Experience-Cloud.png</span><span class="size">63773</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/alexis.ai" class="icon icon icon-ai icon-application-postscript" title="alexis.ai"><span class="name">alexis.ai</span><span class="size">120279</span><span class="date">1/31/2023 8:00:26 PM</span></a></li>
+<li><a href="/Assets/alexis.png" class="icon icon icon-png icon-image" title="alexis.png"><span class="name">alexis.png</span><span class="size">29823</span><span class="date">1/31/2023 8:00:40 PM</span></a></li>
+<li><a href="/Assets/Bootstrap-New.png" class="icon icon icon-png icon-image" title="Bootstrap-New.png"><span class="name">Bootstrap-New.png</span><span class="size">26897</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/build.png" class="icon icon icon-png icon-image" title="build.png"><span class="name">build.png</span><span class="size">6331</span><span class="date">1/30/2023 5:04:18 AM</span></a></li>
+<li><a href="/Assets/Canva.png" class="icon icon icon-png icon-image" title="Canva.png"><span class="name">Canva.png</span><span class="size">170549</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/code.png" class="icon icon icon-png icon-image" title="code.png"><span class="name">code.png</span><span class="size">5659</span><span class="date">1/30/2023 12:24:47 AM</span></a></li>
+<li><a href="/Assets/colors.avif" class="icon icon icon-avif icon-image" title="colors.avif"><span class="name">colors.avif</span><span class="size">44089</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/concentration_mockup.mp4" class="icon icon icon-mp4 icon-video" title="concentration_mockup.mp4"><span class="name">concentration_mockup.mp4</span><span class="size">10667834</span><span class="date">1/30/2023 7:58:16 AM</span></a></li>
+<li><a href="/Assets/concentration.mov" class="icon icon icon-mov icon-video" title="concentration.mov"><span class="name">concentration.mov</span><span class="size">26045743</span><span class="date">1/30/2023 7:20:44 AM</span></a></li>
+<li><a href="/Assets/design.png" class="icon icon icon-png icon-image" title="design.png"><span class="name">design.png</span><span class="size">308005</span><span class="date">1/28/2023 12:01:28 PM</span></a></li>
+<li><a href="/Assets/designer.png" class="icon icon icon-png icon-image" title="designer.png"><span class="name">designer.png</span><span class="size">422427</span><span class="date">1/28/2023 10:56:35 AM</span></a></li>
+<li><a href="/Assets/developer.png" class="icon icon icon-png icon-image" title="developer.png"><span class="name">developer.png</span><span class="size">28182</span><span class="date">1/30/2023 5:26:14 AM</span></a></li>
+<li><a href="/Assets/developer2.png" class="icon icon icon-png icon-image" title="developer2.png"><span class="name">developer2.png</span><span class="size">27162</span><span class="date">2/2/2023 1:06:04 PM</span></a></li>
+<li><a href="/Assets/DevPic.jpg" class="icon icon icon-jpg icon-image" title="DevPic.jpg"><span class="name">DevPic.jpg</span><span class="size">172978</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/DevPic.png" class="icon icon icon-png icon-image" title="DevPic.png"><span class="name">DevPic.png</span><span class="size">731023</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/Featured_Project_Graphic.png" class="icon icon icon-png icon-image" title="Featured_Project_Graphic.png"><span class="name">Featured_Project_Graphic.png</span><span class="size">719042</span><span class="date">1/30/2023 5:43:20 AM</span></a></li>
+<li><a href="/Assets/github.png" class="icon icon icon-png icon-image" title="github.png"><span class="name">github.png</span><span class="size">7354</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/hands.png" class="icon icon icon-png icon-image" title="hands.png"><span class="name">hands.png</span><span class="size">439671</span><span class="date">1/28/2023 11:56:04 AM</span></a></li>
+<li><a href="/Assets/header.jpg" class="icon icon icon-jpg icon-image" title="header.jpg"><span class="name">header.jpg</span><span class="size">8632714</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/Header.png" class="icon icon icon-png icon-image" title="Header.png"><span class="name">Header.png</span><span class="size">82910</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/javascript.png" class="icon icon icon-png icon-image" title="javascript.png"><span class="name">javascript.png</span><span class="size">5855</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/JKLogo.png" class="icon icon icon-png icon-image" title="JKLogo.png"><span class="name">JKLogo.png</span><span class="size">439863</span><span class="date">2/2/2023 8:04:54 AM</span></a></li>
+<li><a href="/Assets/Julie_Kitzer_Resume.pdf" class="icon icon icon-pdf icon-application-pdf" title="Julie_Kitzer_Resume.pdf"><span class="name">Julie_Kitzer_Resume.pdf</span><span class="size">145082</span><span class="date">2/3/2023 11:09:04 AM</span></a></li>
+<li><a href="/Assets/laptop_mockup.png" class="icon icon icon-png icon-image" title="laptop_mockup.png"><span class="name">laptop_mockup.png</span><span class="size">3820274</span><span class="date">1/30/2023 5:52:19 AM</span></a></li>
+<li><a href="/Assets/light_purple_logo.png" class="icon icon icon-png icon-image" title="light_purple_logo.png"><span class="name">light_purple_logo.png</span><span class="size">427837</span><span class="date">2/2/2023 8:12:28 AM</span></a></li>
+<li><a href="/Assets/logo_black.png" class="icon icon icon-png icon-image" title="logo_black.png"><span class="name">logo_black.png</span><span class="size">431716</span><span class="date">2/2/2023 8:13:49 AM</span></a></li>
+<li><a href="/Assets/logo_dark_purple.png" class="icon icon icon-png icon-image" title="logo_dark_purple.png"><span class="name">logo_dark_purple.png</span><span class="size">433411</span><span class="date">2/2/2023 8:12:45 AM</span></a></li>
+<li><a href="/Assets/logo_green.png" class="icon icon icon-png icon-image" title="logo_green.png"><span class="name">logo_green.png</span><span class="size">443527</span><span class="date">2/2/2023 8:12:56 AM</span></a></li>
+<li><a href="/Assets/logo_jk.png" class="icon icon icon-png icon-image" title="logo_jk.png"><span class="name">logo_jk.png</span><span class="size">745589</span><span class="date">2/2/2023 7:56:54 AM</span></a></li>
+<li><a href="/Assets/logo_white.png" class="icon icon icon-png icon-image" title="logo_white.png"><span class="name">logo_white.png</span><span class="size">2966612</span><span class="date">2/2/2023 10:42:07 AM</span></a></li>
+<li><a href="/Assets/logopurplebg.png" class="icon icon icon-png icon-image" title="logopurplebg.png"><span class="name">logopurplebg.png</span><span class="size">805799</span><span class="date">2/2/2023 3:00:35 PM</span></a></li>
+<li><a href="/Assets/logopurplebg.psd" class="icon icon icon-psd" title="logopurplebg.psd"><span class="name">logopurplebg.psd</span><span class="size">55130243</span><span class="date">2/3/2023 10:33:51 AM</span></a></li>
+<li><a href="/Assets/macbook-mock-dribbble.psd" class="icon icon icon-psd" title="macbook-mock-dribbble.psd"><span class="name">macbook-mock-dribbble.psd</span><span class="size">3325650</span><span class="date">1/30/2023 5:53:28 AM</span></a></li>
+<li><a href="/Assets/mockup.png" class="icon icon icon-png icon-image" title="mockup.png"><span class="name">mockup.png</span><span class="size">65662</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/placeholder.mov" class="icon icon icon-mov icon-video" title="placeholder.mov"><span class="name">placeholder.mov</span><span class="size">94448369</span><span class="date">1/30/2023 2:27:37 PM</span></a></li>
+<li><a href="/Assets/placeholder.mp4" class="icon icon icon-mp4 icon-video" title="placeholder.mp4"><span class="name">placeholder.mp4</span><span class="size">1738411</span><span class="date">1/30/2023 2:29:08 PM</span></a></li>
+<li><a href="/Assets/placeholder2.mp4" class="icon icon icon-mp4 icon-video" title="placeholder2.mp4"><span class="name">placeholder2.mp4</span><span class="size">1326384</span><span class="date">1/30/2023 2:34:31 PM</span></a></li>
+<li><a href="/Assets/pokedecks_mockup.mp4" class="icon icon icon-mp4 icon-video" title="pokedecks_mockup.mp4"><span class="name">pokedecks_mockup.mp4</span><span class="size">20612992</span><span class="date">1/30/2023 6:17:25 AM</span></a></li>
+<li><a href="/Assets/pokedecks_mockup.psd" class="icon icon icon-psd" title="pokedecks_mockup.psd"><span class="name">pokedecks_mockup.psd</span><span class="size">13194194</span><span class="date">1/30/2023 6:08:41 AM</span></a></li>
+<li><a href="/Assets/pokedecks_mockup2.mp4" class="icon icon icon-mp4 icon-video" title="pokedecks_mockup2.mp4"><span class="name">pokedecks_mockup2.mp4</span><span class="size">22763746</span><span class="date">1/30/2023 6:32:37 AM</span></a></li>
+<li><a href="/Assets/pokedecks.mov" class="icon icon icon-mov icon-video" title="pokedecks.mov"><span class="name">pokedecks.mov</span><span class="size">82040443</span><span class="date">1/30/2023 5:59:06 AM</span></a></li>
+<li><a href="/Assets/PokeDecksMockup.mp4" class="icon icon icon-mp4 icon-video" title="PokeDecksMockup.mp4"><span class="name">PokeDecksMockup.mp4</span><span class="size">22944727</span><span class="date">1/30/2023 6:40:58 AM</span></a></li>
+<li><a href="/Assets/profilePhoto.png" class="icon icon icon-png icon-image" title="profilePhoto.png"><span class="name">profilePhoto.png</span><span class="size">1112838</span><span class="date">2/1/2023 5:43:03 PM</span></a></li>
+<li><a href="/Assets/profilePhoto2.png" class="icon icon icon-png icon-image" title="profilePhoto2.png"><span class="name">profilePhoto2.png</span><span class="size">1090988</span><span class="date">2/1/2023 5:35:10 PM</span></a></li>
+<li><a href="/Assets/profilePhoto2png.png" class="icon icon icon-png icon-image" title="profilePhoto2png.png"><span class="name">profilePhoto2png.png</span><span class="size">1091774</span><span class="date">2/1/2023 5:36:47 PM</span></a></li>
+<li><a href="/Assets/Project1_PlaceHolder.avif" class="icon icon icon-avif icon-image" title="Project1_PlaceHolder.avif"><span class="name">Project1_PlaceHolder.avif</span><span class="size">17204</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/pUpdate_documentation.pdf" class="icon icon icon-pdf icon-application-pdf" title="pUpdate_documentation.pdf"><span class="name">pUpdate_documentation.pdf</span><span class="size">317351</span><span class="date">2/3/2023 10:15:57 AM</span></a></li>
+<li><a href="/Assets/pupdate_documentation.png" class="icon icon icon-png icon-image" title="pupdate_documentation.png"><span class="name">pupdate_documentation.png</span><span class="size">1153525</span><span class="date">2/3/2023 10:23:57 AM</span></a></li>
+<li><a href="/Assets/pupdate.png" class="icon icon icon-png icon-image" title="pupdate.png"><span class="name">pupdate.png</span><span class="size">37285</span><span class="date">1/30/2023 5:45:28 PM</span></a></li>
+<li><a href="/Assets/pupdateplaceholder.png" class="icon icon icon-png icon-image" title="pupdateplaceholder.png"><span class="name">pupdateplaceholder.png</span><span class="size">485615</span><span class="date">2/2/2023 11:48:17 AM</span></a></li>
+<li><a href="/Assets/pupdatePlan.png" class="icon icon icon-png icon-image" title="pupdatePlan.png"><span class="name">pupdatePlan.png</span><span class="size">1116667</span><span class="date">2/3/2023 10:05:13 AM</span></a></li>
+<li><a href="/Assets/radialGradient.jpg" class="icon icon icon-jpg icon-image" title="radialGradient.jpg"><span class="name">radialGradient.jpg</span><span class="size">385136</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/react.png" class="icon icon icon-png icon-image" title="react.png"><span class="name">react.png</span><span class="size">10324</span><span class="date">1/23/2023 10:45:19 PM</span></a></li>
+<li><a href="/Assets/rodrigo.ai" class="icon icon icon-ai icon-application-postscript" title="rodrigo.ai"><span class="name">rodrigo.ai</span><span class="size">117431</span><span class="date">1/31/2023 4:11:39 PM</span></a></li>
+<li><a href="/Assets/rodrigo.png" class="icon icon icon-png icon-image" title="rodrigo.png"><span class="name">rodrigo.png</span><span class="size">29870</span><span class="date">1/31/2023 4:45:35 PM</span></a></li>
+<li><a href="/Assets/test.mp4" class="icon icon icon-mp4 icon-video" title="test.mp4"><span class="name">test.mp4</span><span class="size">708613</span><span class="date">1/30/2023 2:13:35 PM</span></a></li>
+<li><a href="/Assets/testing.mp4" class="icon icon icon-mp4 icon-video" title="testing.mp4"><span class="name">testing.mp4</span><span class="size">2218781</span><span class="date">1/30/2023 2:24:29 PM</span></a></li>
+<li><a href="/Assets/Untitled-2-Recovered.mp4" class="icon icon icon-mp4 icon-video" title="Untitled-2-Recovered.mp4"><span class="name">Untitled-2-Recovered.mp4</span><span class="size">620666</span><span class="date">1/30/2023 2:16:22 PM</span></a></li>
+<li><a href="/Assets/videoPlaceholder.mp4" class="icon icon icon-mp4 icon-video" title="videoPlaceholder.mp4"><span class="name">videoPlaceholder.mp4</span><span class="size">2387814</span><span class="date">1/30/2023 5:41:47 AM</span></a></li></ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../PortfolioDuplicate"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "PortfolioDuplicate"
+	}
+}
