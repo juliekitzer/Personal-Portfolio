@@ -149,7 +149,7 @@ a :hover {
 
 .button-5:hover {
   transform: translateY(-1px);
-  color:#fff
+  color: #fff
 }
 
 .button-5:active {
@@ -158,7 +158,7 @@ a :hover {
   transform: translateY(0);
 }
 
-.miniTabs li a:hover{
+.miniTabs li a:hover {
   background-color: #b8b8ff;
 }
 
@@ -369,11 +369,11 @@ h3 {
 .tabs li.is-active a {
   border-bottom-color: var(--Green);
   color: #363636;
-  
+
 }
 
-.tabs.is-boxed li.is-active :hover{
-background-color: var(--LightPurple);
+.tabs.is-boxed li.is-active :hover {
+  background-color: var(--LightPurple);
 }
 
 .tabs.is-boxed li.is-active a {
@@ -473,6 +473,14 @@ background-color: var(--LightPurple);
 .is-size-7 {
   font-size: 0.75rem !important;
   padding-top: 1rem;
+}
+
+.side__styledSideElement-sc-1duznzb-0 .h0vuup{
+  display: none;
+}
+
+.verticalEmail {
+  display: none;
 }
 
 @media screen and (min-width: 320px) {
